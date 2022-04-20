@@ -7,7 +7,6 @@ rust-version = "1.60"
 description = "Implementation of Shamir secret sharing for use with files"
 repository = "https://github.com/salsifis/shamir_secret_sharing"
 license = "Apache-2.0"
-license-file = "LICENSE.txt"
 keywords = ["shamir", "secret", "galois"]
 categories = ["cryptography", "command-line-utilities", "algorithms"]
 
