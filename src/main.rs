@@ -165,7 +165,7 @@ fn split_secret_file_into_shares(
     let input_file = std::io::BufReader::new(File::open(filepath)?);
     let mut output_files: Vec<_> = vec![];
     for index in 1..=num_shares {
-        let file_name = format!("{}_{:03}", filepath, index);
+        let file_name = format!("{filepath}_{index:03}");
         let opened_file = std::io::BufWriter::new(File::create(file_name)?);
         output_files.push(opened_file);
     }
@@ -311,18 +311,15 @@ fn recover_shared_secret(
             }
         }));
 
-        if y_values_as_options.iter().any(|x| *x == None) {
-            if y_values_as_options.iter().all(|x| *x == None) {
+        if y_values_as_options.iter().any(std::option::Option::is_none) {
+            if y_values_as_options.iter().all(std::option::Option::is_none) {
                 break;
             }
             return Err("An input file has reached its end".into());
         }
 
         y_values.clear();
-        y_values.extend(y_values_as_options.iter().map(|x| match x {
-            Some(val) => *val,
-            _ => 0,
-        }));
+        y_values.extend(y_values_as_options.iter().map(|x| x.map_or(0, |val| val)));
 
         let recovered_byte = shamir::recover_secret_from_points(&abscissae, &y_values, threshold);
         output_file.write_all(&[recovered_byte])?;

@@ -478,7 +478,7 @@ mod tests {
 
         assert_eq!(*(&p1 + &p1).coefficients(), Vec::new());
         assert_eq!(*(&p1 - &p1).coefficients(), Vec::new());
-        assert_eq!(p1.degree(), Some(5), "p1 {:?} degree is not 5", p1);
+        assert_eq!(p1.degree(), Some(5), "p1 {p1:?} degree is not 5");
         assert_ne!(p1.coefficients()[5], Elt::new(0));
         assert_eq!(p1.coefficients()[0], Elt::new(10));
 
