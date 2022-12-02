@@ -1,5 +1,5 @@
 [package]
-name = "shamir_secret_sharing"
+name = "shamir_file_secret_sharing"
 version = "1.0.0"
 authors = ["Benoît Mortgat"]
 edition = "2021"
